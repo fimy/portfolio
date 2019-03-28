@@ -1,3 +1,9 @@
+# IMPORTANT: it is necessary to modify the concordance function in nltk so that result is 
+# a RETURN rather than a PRINT. See https://github.com/nltk/nltk/pull/1333
+
+# This is created for pythonanywhere.com. Some tweaks may be necessary for running on a self-hosted Flask instance.
+# See the app at nhousley.pythonanywhere.com
+
 from flask import Flask, request
 from concord_result import concordance
 from nltk.text import ConcordanceIndex
