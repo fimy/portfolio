@@ -1,0 +1,54 @@
+# This script scrapes a sequence of web pages to collect data in a .txt file. In order for this to work, the pages
+# must be numbered sequentially and contain the needed information in the same location in a table.
+
+# Import libraries
+import requests
+import urllib
+import time
+import os
+from bs4 import BeautifulSoup
+
+# Set working directory
+path = "/path/to/directory/"
+os.chdir(path)
+
+# Set the URL you want to webscrape from. In this instance, the pages were numbered sequentially by an identifier
+# at the end of the URL. Enter the min and max numerical values.
+for i in range(min, max):
+	url = 'http://website.com/'
+	append = str(i)
+	url_a = url+append
+
+	# Connect to the URL
+	response = requests.get(url_a)
+
+	# Parse HTML and save to BeautifulSoup object
+	soup = BeautifulSoup(response.text, "html.parser")
+
+	# Record the data in variables and extract text from tags. Find the location of the data by printing the output from
+  # BeautifulSoup. That number will go in the brackets.
+	name_a = soup.findAll('td')[1]
+	date_a = soup.findAll('td')[2]
+	case_a = soup.findAll('td')[3]
+	var_a = soup.findAll('td')[4]
+  # Extract the text value from out of the tag.
+	name = name_a.get_text()
+	date = date_a.get_text()
+	case = case_a.get_text()
+	var = opp_party_a.get_text() 
+
+	# Add url ID into a string containing all variables to be written to a file
+
+	entry = (append+", "+case+", "+opp_party+", "+date+"\n")
+	# print entry
+
+	# Write variable (containing case type) to txt file (must create the file first in working directory)
+
+	file = open("results.txt","a")
+	file.write(entry)
+	file.close()
+	time.sleep(1)
+print "Finished!"
+
+# Writing to a .csv file is more useful but more complicated. I simply changed the file extension to .csv and it 
+# opened just fine.
